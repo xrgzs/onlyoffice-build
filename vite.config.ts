@@ -6,6 +6,7 @@ import { fileURLToPath } from "url"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
+  root: __dirname,
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "node_modules/onlyoffice-web-comp/src"),
@@ -21,15 +22,18 @@ export default defineConfig({
       ],
     }),
   ],
+  base: "./",
   build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "OnlyOfficeWebComp",
-      formats: ["es"],
-      fileName: () => "onlyoffice-web-comp.es.js",
+    rollupOptions: {
+      input: {
+        index: path.resolve(__dirname, "index.html"),
+      },
+      output: {
+        entryFileNames: "assets/[name]-[hash].js",
+      },
     },
     outDir: path.resolve(__dirname, "dist"),
     minify: false,
-    sourcemap: true,
+    sourcemap: false,
   },
 })
