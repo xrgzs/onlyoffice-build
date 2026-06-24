@@ -1,0 +1,21 @@
+{
+  "name": "onlyoffice-build",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "onlyoffice-web-comp": "github:electroluxcode/onlyoffice-web-comp",
+    "nanoid": "^5.1.6",
+    "exceljs": "^4.4.0",
+    "mammoth": "^1.11.0",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "vite": "^8.0.16",
+    "vite-plugin-static-copy": "^3.4.0",
+    "typescript": "^5.9.3"
+  }
+}
