@@ -1,7 +1,7 @@
 import { OnlyOfficeManager, FILE_TYPE, STATIC_RESOURCE } from "@/components/onlyoffice-web-comp"
 
-// Compute base path from current script location (same origin as this page)
-const base = new URL("./", import.meta.url).href.replace(/\/$/, "")
+// Use page origin as base (SDK assets are at site root, not in /assets/)
+const base = window.location.origin
 const sdkRoot = `${base}/packages/onlyoffice/9.3.0`
 
 // Patch static resource paths to use same-origin assets
