@@ -1,4 +1,4 @@
-import { OnlyOfficeManager, FILE_TYPE, STATIC_RESOURCE } from "@/components/onlyoffice-web-comp"
+import { OnlyOfficeManager, FILE_TYPE, STATIC_RESOURCE, onlyofficeEventbus, ONLYOFFICE_EVENT_KEYS } from "@/components/onlyoffice-web-comp"
 
 // Use page origin as base (SDK assets are at site root, not in /assets/)
 const base = window.location.origin
@@ -45,6 +45,24 @@ window.addEventListener("message", async (e) => {
         },
         file,
       )
+
+      // Native autosave: when user saves (Ctrl+S / toolbar), export and notify parent
+      onlyofficeEventbus.on(ONLYOFFICE_EVENT_KEYS.SAVE_DOCUMENT, async () => {
+        try {
+          if (!manager) return
+          const { blob, fileName: name } = await manager.exportAsBlob()
+          const reader = new FileReader()
+          reader.onload = () => {
+            parent.postMessage(
+              { type: "save-result", payload: { data: reader.result, fileName: name } },
+              "*",
+            )
+          }
+          reader.readAsDataURL(blob)
+        } catch (err) {
+          console.error("AutoSave export failed:", err)
+        }
+      })
 
       parent.postMessage({ type: "ready" }, "*")
     } catch (err) {
