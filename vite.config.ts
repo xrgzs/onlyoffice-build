@@ -16,8 +16,11 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: path.resolve(__dirname, "node_modules/onlyoffice-web-comp/public/packages/onlyoffice/*"),
+          // stripBase: 5 strips "node_modules/onlyoffice-web-comp/public/packages/onlyoffice"
+          // so files land at dest/9.3.0/... instead of dest/node_modules/.../9.3.0/...
+          src: "node_modules/onlyoffice-web-comp/public/packages/onlyoffice",
           dest: "packages/onlyoffice",
+          rename: { stripBase: 5 },
         },
       ],
     }),
