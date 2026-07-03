@@ -1,24 +1,7 @@
-import { OnlyOfficeManager, FILE_TYPE, STATIC_RESOURCE, onlyofficeEventbus, ONLYOFFICE_EVENT_KEYS } from "@/components/onlyoffice-web-comp"
+import { OnlyOfficeManager, FILE_TYPE, registerOnlyOfficeStaticResource, onlyofficeEventbus, ONLYOFFICE_EVENT_KEYS } from "@/components/onlyoffice-web-comp"
 
-// Use page origin as base (SDK assets are at site root, not in /assets/)
-const base = window.location.origin
-const sdkRoot = `${base}/packages/onlyoffice/9.3.0`
-
-// Patch static resource paths to use same-origin assets
-Object.assign(STATIC_RESOURCE.onlyoffice, {
-  root: sdkRoot,
-  apiUrl: `${sdkRoot}/web-apps/apps/api/documents/api.js`,
-  preloadUrl: `${sdkRoot}/web-apps/apps/api/documents/preload.html`,
-})
-Object.assign(STATIC_RESOURCE.x2t, {
-  root: `${sdkRoot}/x2t`,
-  script: `${sdkRoot}/x2t/x2t.js`,
-  wasm: `${sdkRoot}/x2t/x2t.wasm`,
-  pdfFonts: {
-    root: `${sdkRoot}/x2t-fonts`,
-    default: `${sdkRoot}/x2t-fonts/Carlito-Regular.ttf`,
-  },
-})
+// Use local (same-origin) SDK assets — no external CDN
+registerOnlyOfficeStaticResource({ cdnOrigin: null })
 
 let manager: InstanceType<typeof OnlyOfficeManager> | null = null
 
