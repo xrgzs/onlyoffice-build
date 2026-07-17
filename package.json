@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "onlyoffice-web-comp": "github:electroluxcode/onlyoffice-web-comp",
-    "nanoid": "^5.1.16",
+    "nanoid": "^6.0.0",
     "exceljs": "^4.4.0",
     "mammoth": "^1.11.0",
     "lodash-es": "^4.17.21"
