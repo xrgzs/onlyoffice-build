@@ -10,7 +10,7 @@
     "onlyoffice-web-comp": "github:electroluxcode/onlyoffice-web-comp",
     "nanoid": "^6.0.1",
     "exceljs": "^4.4.0",
-    "mammoth": "^1.11.0",
+    "mammoth": "^1.12.1",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
